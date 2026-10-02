@@ -21,9 +21,8 @@ class FlowState(TypedDict):
 
 
 class QuestionCategory(BaseModel):
-    category: Literal['content', 'sales', 'task', 'accounts'] = Field(
-        default="content",
-        description="User ke sawaal ki category"
+    category: Literal["content", "sales", "task", "accounts"] = Field(
+        description="User ke sawaal ki category: content, sales, task, or accounts"
     )
 
 
@@ -32,7 +31,11 @@ def build_graph():
     llm = ChatGroq(model="openai/gpt-oss-20b")
 
     def check_question_category(state: FlowState) -> FlowState:
-        st_llm = llm.with_structured_output(QuestionCategory)
+        st_llm = llm.with_structured_output(
+    QuestionCategory,
+    method="json_schema",
+    strict=True
+)
         res = st_llm.invoke(
             f"""Categorize this question into one of: content, sales, task, accounts.
 
