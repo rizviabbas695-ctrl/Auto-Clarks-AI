@@ -11,7 +11,7 @@ os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 
 st.set_page_config(page_title=BOT_NAME, page_icon="🚗")
 st.title("🚗 " + BOT_NAME)
-st.caption("Content, Sales, Task planning, ya Accounts — kuch bhi poochho")
+st.caption("Ask any question related to - task,content,account,sales")
 
 
 class FlowState(TypedDict):
